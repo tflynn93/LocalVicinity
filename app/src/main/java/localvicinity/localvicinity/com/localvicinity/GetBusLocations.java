@@ -30,8 +30,8 @@ public class GetBusLocations {
     public static List<Bus> getStackSitesFromFile(Context ctx) {
 
         // List of bars that we will return
-        List<Bus> specials;
-        specials = new ArrayList<Bus>();
+        List<Bus> busses;
+        busses = new ArrayList<Bus>();
 
         //current StackSite while parsing
         Bus currentLocation = null;
@@ -83,7 +83,7 @@ public class GetBusLocations {
                     case XmlPullParser.END_TAG:
                         if (tagname.equalsIgnoreCase(KEY_BUS)) {
                             //if </bar> then we are done with current bar add it to the list.
-                            specials.add(currentLocation);
+                            busses.add(currentLocation);
                         } else if (tagname.equalsIgnoreCase(KEY_DEST)) {
                             currentLocation.setName(curText);
                             //System.out.println("Destination: " + curText);
@@ -116,13 +116,11 @@ public class GetBusLocations {
         }
 
         //return the populated list
-        for (Iterator<Bus> iterator = specials.iterator(); iterator.hasNext(); ) {
+        for (Iterator<Bus> iterator = busses.iterator(); iterator.hasNext(); ) {
             MyLocation bus = iterator.next();
         }
 
-        //Randomize the order of the list
-        //Collections.shuffle(specials);
         //Return the list
-        return specials;
+        return busses;
     }
 }

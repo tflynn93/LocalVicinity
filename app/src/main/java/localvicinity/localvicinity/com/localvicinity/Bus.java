@@ -127,9 +127,6 @@ public class Bus extends MyLocation {
                 route_name = "Invalid Route Number";
                 break;
         }
-
         return route_name;
-
     }
-
 }

@@ -7,6 +7,5 @@ package localvicinity.localvicinity.com.localvicinity;
 public class BusStop extends MyLocation {
 
     public void BusStop() {
-
     }
 }

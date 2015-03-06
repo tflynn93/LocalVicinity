@@ -30,6 +30,7 @@ public class ViewLocationsActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_view_contacts);
 
+        //Set up the toolbar
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("View Locations in Database");
 
@@ -57,9 +58,11 @@ public class ViewLocationsActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
+        //Get selectedValue and store it in a String
         String selectedValue = (String) getListAdapter().getItem(position);
         selectedContact(selectedValue);
 
+        //Pass values to the next activity
         Bundle dataBundle = new Bundle();
         dataBundle.putString("_id", valueTOUpdate_id);
         dataBundle.putString("name", valueTOUpdate_name);

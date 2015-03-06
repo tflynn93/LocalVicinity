@@ -26,11 +26,11 @@ public class GetBusStops {
 
     public static List<BusStop> getStackSitesFromFile(Context ctx) {
 
-        // List of bars that we will return
-        List<BusStop> specials;
-        specials = new ArrayList<BusStop>();
+        //List of bus stops that we will return
+        List<BusStop> bs;
+        bs = new ArrayList<BusStop>();
 
-        //current StackSite while parsing
+        //current location while parsing
         BusStop currentLocation = null;
         //current text value while parsing
         String curText = "";
@@ -40,14 +40,9 @@ public class GetBusStops {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             XmlPullParser xpp = factory.newPullParser();
 
-            //System.out.println("Starting XML Parser");
-
             //Create file stream and buffered reader
             FileInputStream fis = ctx.openFileInput("stops.xml");
-
             BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
-
-            //System.out.println("After fis and reader");
 
             //point to the parser of the file
             xpp.setInput(reader);
@@ -59,9 +54,6 @@ public class GetBusStops {
             while (eventType != XmlPullParser.END_DOCUMENT) {
                 //Get the current tagname
                 String tagname = xpp.getName();
-                //System.out.println(xpp.toString());
-                //System.out.println("inside while loop + tagname =" + tagname);
-
                 //React to different event types appropriately
                 switch (eventType) {
                     case XmlPullParser.START_TAG:
@@ -79,17 +71,14 @@ public class GetBusStops {
 
                     case XmlPullParser.END_TAG:
                         if (tagname.equalsIgnoreCase(KEY_STOP)) {
-                            //if </bar> then we are done with current bar add it to the list.
-                            specials.add(currentLocation);
+                            //if </location> then we are done with current location add it to the list.
+                            bs.add(currentLocation);
                         } else if (tagname.equalsIgnoreCase(KEY_NAME)) {
                             currentLocation.setName(curText);
-                            //System.out.println("Destination: " + curText);
                         } else if (tagname.equalsIgnoreCase(KEY_LAT)) {
                             currentLocation.setLatitude(Double.parseDouble(curText));
-                            //System.out.println("Longitude: " + curText);
                         } else if (tagname.equalsIgnoreCase(KEY_LONG)) {
                             currentLocation.setLongitude(Double.parseDouble(curText));
-                            //System.out.println("Longitude: " + curText);
                         }
                         break;
 
@@ -103,14 +92,12 @@ public class GetBusStops {
             e.printStackTrace();
         }
 
-        //return the populated list
-        for (Iterator<BusStop> iterator = specials.iterator(); iterator.hasNext(); ) {
+        //populate the list
+        for (Iterator<BusStop> iterator = bs.iterator(); iterator.hasNext(); ) {
             BusStop bus = iterator.next();
         }
 
-        //Randomize the order of the list
-        //Collections.shuffle(specials);
         //Return the list
-        return specials;
+        return bs;
     }
 }

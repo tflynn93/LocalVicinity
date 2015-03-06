@@ -12,5 +12,4 @@ public class DistanceComporator implements Comparator<MyLocation> {
     public int compare(MyLocation a, MyLocation b) {
         return a.getDistance() - b.getDistance(); // Ascending
     }
-
 }

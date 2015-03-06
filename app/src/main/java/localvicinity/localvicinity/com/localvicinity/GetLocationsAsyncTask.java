@@ -12,14 +12,14 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
-
 import android.os.AsyncTask;
-
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
 public class GetLocationsAsyncTask extends AsyncTask<MyLocation, Void, ArrayList<MyLocation>> {
+
+    //declare objects
     static BasicDBObject user = null;
     static String OriginalObject = "";
     static String server_output = null;
@@ -28,8 +28,10 @@ public class GetLocationsAsyncTask extends AsyncTask<MyLocation, Void, ArrayList
     @Override
     protected ArrayList<MyLocation> doInBackground(MyLocation... arg0) {
 
+        //Create arraylist of locations
         ArrayList<MyLocation> mylocations = new ArrayList<MyLocation>();
 
+        //New querybuilder object
         QueryBuilder qb = new QueryBuilder();
         URL url = null;
         try {
@@ -50,7 +52,6 @@ public class GetLocationsAsyncTask extends AsyncTask<MyLocation, Void, ArrayList
             e.printStackTrace();
         }
         conn.setRequestProperty("Accept", "application/json");
-
         try {
             if (conn.getResponseCode() != 200) {
                 throw new RuntimeException("Failed : HTTP error code : "
@@ -67,7 +68,6 @@ public class GetLocationsAsyncTask extends AsyncTask<MyLocation, Void, ArrayList
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         try {
             while ((temp_output = br.readLine()) != null) {

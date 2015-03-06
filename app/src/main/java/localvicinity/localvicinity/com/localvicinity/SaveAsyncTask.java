@@ -17,13 +17,17 @@ public class SaveAsyncTask extends AsyncTask<MyLocation, Void, Boolean> {
     @Override
     protected Boolean doInBackground(MyLocation... arg0) {
         try {
+            //New myLocation object
             MyLocation myLocation = arg0[0];
 
+            //New QueryBuilder object
             QueryBuilder qb = new QueryBuilder();
 
+            //HttpClient setup
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost request = new HttpPost(qb.buildLocationSaveURL());
 
+            //Set up json parsing
             StringEntity params = new StringEntity(qb.createLocation(myLocation));
             request.addHeader("content-type", "application/json");
             request.setEntity(params);
@@ -35,7 +39,6 @@ public class SaveAsyncTask extends AsyncTask<MyLocation, Void, Boolean> {
                 return false;
             }
         } catch (Exception e) {
-            //e.getCause();
             String val = e.getMessage();
             String val2 = val;
             return false;

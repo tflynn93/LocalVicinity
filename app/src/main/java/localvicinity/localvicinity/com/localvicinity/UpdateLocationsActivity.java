@@ -19,30 +19,31 @@ import android.widget.EditText;
 
 public class UpdateLocationsActivity extends ActionBarActivity {
 
+    //Initialize views and variables
     EditText editText_last_name;
     EditText editText_phone;
     EditText editText_email;
     EditText editText_fname;
-
     String _id;
     String name;
     String longitude;
     String latitude;
     String type;
-
     Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Set content view and setup toolbar
         setContentView(R.layout.activity_update);
-
         mToolbar = (Toolbar) findViewById(R.id.include);
         setSupportActionBar(mToolbar);
         mToolbar.setTitle("Update Record");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Update Record");
+
+        //Bind views
         editText_fname = (EditText) findViewById(R.id.editText_fname);
         editText_last_name = (EditText) findViewById(R.id.editText_last_name);
         editText_email = (EditText) findViewById(R.id.editText_email);
@@ -63,14 +64,10 @@ public class UpdateLocationsActivity extends ActionBarActivity {
         editText_phone.setText(type);
     }
 
-    /**
-     * Method that updates a given cloud contact
-     *
-     * @param v
-     * @throws UnknownHostException
-     */
     public void updateContact(View v) throws UnknownHostException {
+        //New MyLocation object
         MyLocation location = new MyLocation();
+        //Set up MongoLab updating
         location.setDoc_id(_id);
         location.setName(editText_fname.getText().toString());
         location.setLongitude(Double.parseDouble(editText_last_name.getText().toString()));
@@ -83,11 +80,6 @@ public class UpdateLocationsActivity extends ActionBarActivity {
         finish();
     }
 
-    /**
-     * AsyncTask to update a given contact
-     *
-     * @author KYAZZE MICHAEL
-     */
     final class MongoLabUpdateContact extends AsyncTask<Object, Void, Boolean> {
 
         @Override
@@ -95,8 +87,9 @@ public class UpdateLocationsActivity extends ActionBarActivity {
             MyLocation myLocation = (MyLocation) params[0];
 
             try {
-
+                //New QueryBuilder object
                 QueryBuilder qb = new QueryBuilder();
+                //Set up HttpURLConnection object and properties
                 URL url = new URL(qb.buildLocationUpdateURL(myLocation.getDoc_id()));
                 HttpURLConnection connection = (HttpURLConnection) url
                         .openConnection();
@@ -117,17 +110,12 @@ public class UpdateLocationsActivity extends ActionBarActivity {
                     return true;
                 } else {
                     return false;
-
                 }
 
             } catch (Exception e) {
                 e.getMessage();
                 return false;
-
             }
-
         }
-
     }
-
 }
