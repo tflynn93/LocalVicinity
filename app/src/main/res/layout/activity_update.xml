@@ -1,0 +1,71 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".MainActivity" >
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/include" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="updateContact"
+        android:text="Update Record"
+        android:background="@color/blue"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/editText_phone"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/editText_fname"
+        android:layout_below="@+id/include"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp"
+        android:textColor="@color/blue" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/editText_last_name"
+        android:layout_below="@+id/editText_fname"
+        android:layout_alignLeft="@+id/editText_fname"
+        android:layout_alignStart="@+id/editText_fname"
+        android:selectAllOnFocus="false"
+        android:textColor="@color/blue" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/editText_email"
+        android:layout_below="@+id/editText_last_name"
+        android:layout_alignLeft="@+id/editText_last_name"
+        android:layout_alignStart="@+id/editText_last_name"
+        android:textColor="@color/blue" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/editText_phone"
+        android:layout_below="@+id/editText_email"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/blue" />
+
+</RelativeLayout>

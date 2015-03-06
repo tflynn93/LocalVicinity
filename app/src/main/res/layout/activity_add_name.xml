@@ -1,0 +1,121 @@
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context="localvicinity.localvicinity.com.localvicinity.AddName">
+
+    <include layout="@layout/toolbar"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/place_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/toolbar"
+        android:hint="First Name"
+        android:textColor="@color/darkblue"
+        android:textColorHint="#BBDEFB"
+        android:padding="25dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/longitude"
+        android:layout_below="@+id/place_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:hint="Last Name"
+        android:textColor="@color/darkblue"
+        android:textColorHint="#BBDEFB"
+        android:padding="25dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/latitude"
+        android:layout_below="@+id/longitude"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:hint="Email"
+        android:textColor="@color/darkblue"
+        android:textColorHint="#BBDEFB"
+        android:padding="25dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/editText4"
+        android:layout_below="@+id/latitude"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/latitude"
+        android:layout_alignEnd="@+id/latitude"
+        android:hint="Phone"
+        android:textColor="@color/darkblue"
+        android:textColorHint="#BBDEFB"
+        android:textIsSelectable="true"
+        android:padding="25dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit to MongoDB"
+        android:id="@+id/submit_button"
+        android:background="@color/blue"
+        android:textColor="#FFFFFF"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:layout_below="@+id/editText4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Add Names to MongoDB!"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/blue"
+        android:textSize="24dp"
+        android:fontFamily="@string/font_fontFamily_medium" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VIEW DATABASE"
+        android:id="@+id/button2"
+        android:layout_below="@+id/submit_button"
+        android:layout_alignLeft="@+id/submit_button"
+        android:layout_alignStart="@+id/submit_button"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="45dp"
+        android:layout_alignRight="@+id/submit_button"
+        android:layout_alignEnd="@+id/submit_button"
+        android:background="@color/blue" />
+
+
+</RelativeLayout>
+</ScrollView>
