@@ -117,18 +117,21 @@ public class MapsActivity extends ActionBarActivity {
     }
 
     private void setUpMap() {
-        // Enable MyLocation Layer of Google Map
+        // Enable MyLocation Layer of Google Map and setup map options
         mMap.setMyLocationEnabled(true);
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.setTrafficEnabled(true);
 
+        //Initialize variables for loop counter and long/lat
         int count = 0;
         double latitude = 0;
         double longitude = 0;
 
+        //Initialize icon
         BitmapDescriptor icon;
 
+        //If block to determine correct icon (will methodize later)
         if (lt == LocationType.COMPUTER_LAB) {
             icon = BitmapDescriptorFactory.fromResource(R.drawable.labicon);
         } else if (lt == LocationType.RESTAURANT) {
@@ -149,13 +152,6 @@ public class MapsActivity extends ActionBarActivity {
             icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
         }
 
-
-        //.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-
-        //Toast.makeText(MapsActivity.this, count + " being displayed", Toast.LENGTH_SHORT).show();
-
-        //mMap.addMarker(new MarkerOptions().position(nac).title(title).snippet(desc));
-
         // Get LocationManager object from System Service LOCATION_SERVICE
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -173,9 +169,6 @@ public class MapsActivity extends ActionBarActivity {
         } catch (NullPointerException e) {
 
         }
-
-        // set map type
-        //mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         // Get latitude of the current location
         try {
@@ -211,10 +204,9 @@ public class MapsActivity extends ActionBarActivity {
         if (bigcount == 0) {
             CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(myCoordinates, 15);
         }
-        //mMap.animateCamera(yourLocation);
 
-
-        user = new Location("User");
+        //Create new user and set location
+        user = new User("User");
         user.setLongitude(latLng.longitude);
         user.setLatitude(latLng.latitude);
 
@@ -224,43 +216,41 @@ public class MapsActivity extends ActionBarActivity {
             try {
                 l.setLatitude(loc.getLatitude());
                 l.setLongitude(loc.getLongitude());
-
                 loc.setDistance((int) user.distanceTo(l));
             } catch (NullPointerException e) {
-                System.out.println("Null caught");
+                System.out.println("NullPointerException caught");
             }
         }
 
+        //Sort points based on distance
         Collections.sort(points, new DistanceComporator());
         count = 0;
 
+        //If the location type isn't bus stop then go through and map points
         if (lt != LocationType.BUS_STOP) {
             for (MyLocation loc : points) {
                 if (loc.getLocationType() == lt) {
                     if (count == 0) {
                         if (bigcount != 0) {
                             try {
-                                System.out.println(Double.toString(loc.getLatitude()) + ": " + Double.toString(loc.getLongitude()));
                                 Polyline line = mMap.addPolyline(new PolylineOptions()
                                         .add(new LatLng(loc.getLatitude(), loc.getLongitude()), new LatLng(user.getLatitude(), user.getLongitude()))
                                         .width(5)
                                         .color(Color.RED));
                             } catch (NullPointerException e) {
-                                System.out.println("NULL HERE");
+                                System.out.println("NullPointerException caught");
                             }
                         }
                     }
-                    System.out.println("Add marker time!!!!!!!!");
-                    mMap.addMarker(new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude())).title(loc.getName()).snippet(loc.getType()).icon(icon));
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude())).title(loc.getName()).snippet(loc.getType() + " - Distance: " + loc.getDistance() + "m").icon(icon));
                     count += 1;
                     bigcount += 1;
                 }
             }
         }
-
     }
 
-
+    //Task that runs every 30 seconds to refresh bus listings
     private final Runnable m_Runnable = new Runnable() {
         public void run()
 
@@ -269,13 +259,12 @@ public class MapsActivity extends ActionBarActivity {
             SitesDownloadTask s = new SitesDownloadTask();
             s.execute();
             MapsActivity.this.mHandler.postDelayed(m_Runnable, 30000);
-
         }
 
     };
 
+    //Download vehicle locations
     public class SitesDownloadTask extends AsyncTask<Void, Void, Void> {
-
         @Override
         protected Void doInBackground(Void... arg0) {
             //Download the file
@@ -297,12 +286,11 @@ public class MapsActivity extends ActionBarActivity {
             busStopList = GetBusStops.getStackSitesFromFile(getApplicationContext());
 
 
-            //Location myLocation = mMap.getMyLocation();
             try {
                 user.setLongitude(mMap.getMyLocation().getLongitude());
                 user.setLatitude(mMap.getMyLocation().getLatitude());
             } catch (NullPointerException e) {
-                System.out.println("Oopsies");
+                System.out.println("NullPointerException caught");
             }
 
             BitmapDescriptor icon2;
@@ -322,6 +310,7 @@ public class MapsActivity extends ActionBarActivity {
 
             }
 
+            //Sort busses based on distance
             Collections.sort(busList, new DistanceComporator());
             int count2 = 0;
 
@@ -329,7 +318,7 @@ public class MapsActivity extends ActionBarActivity {
                 try {
 
                     if (count2 == 0 && bigcount != 0) {
-                        System.out.println("DISTANCE: " + loc.getDistance());
+                        //System.out.println("DISTANCE: " + loc.getDistance());
                         Polyline line = mMap.addPolyline(new PolylineOptions()
                                 .add(new LatLng(loc.getLatitude(), loc.getLongitude()), new LatLng(user.getLatitude(), user.getLongitude()))
                                 .width(5)
@@ -337,16 +326,17 @@ public class MapsActivity extends ActionBarActivity {
                     }
                     count2 += 1;
                     if (loc.getName().equals("Invalid Route Number")) {
-
+                        //DO NOTHING IF ROUTE NAME IS INVALID
                     } else {
-                        //System.out.println("Inside MapsActivity: " + loc.name);
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude())).title(loc.getRoute_number(loc.getRoute_number())).snippet("Passengers: " + loc.getOnBoard()).icon(icon));
+                        //Add appropriate marker assuming router number is valid
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude())).title(loc.getRoute_number(loc.getRoute_number())).snippet("Passengers: " + loc.getOnBoard() + "- Distance: " + loc.getDistance() + "m").icon(icon));
                     }
                 } catch (NullPointerException e) {
-                    System.out.println("Null caught");
+                    System.out.println("NullPointerException caught");
                 }
             }
 
+            //Perform tasks for each bus stop
             Location l2 = new Location("Stops");
             for (BusStop bs : busStopList) {
                 try {
@@ -354,10 +344,11 @@ public class MapsActivity extends ActionBarActivity {
                     l2.setLongitude(bs.getLongitude());
                     bs.setDistance((int) user.distanceTo(l2));
                 } catch (NullPointerException e) {
-
+                    System.out.println("NullPointerException caught");
                 }
             }
 
+            //Sort bus stops by distance
             Collections.sort(busStopList, new DistanceComporator());
 
             int count = 0;
@@ -368,15 +359,14 @@ public class MapsActivity extends ActionBarActivity {
                             .width(5)
                             .color(Color.RED));
                 }
-                //System.out.println("Inside MapsActivity: " + loc.name);
-                mMap.addMarker(new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude())).title(loc.getName()).snippet("Bus Stop").icon(icon2));
+                mMap.addMarker(new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude())).title(loc.getName()).snippet("Bus Stop - Distance: " + loc.getDistance() + "m").icon(icon2));
                 count += 1;
                 bigcount += 1;
-                //System.out.println(loc.getName());
             }
         }
     }
 
+    //If system back button is pressed the finish the activity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
