@@ -1,5 +1,9 @@
 package localvicinity.localvicinity.com.localvicinity;
 
+/**
+ * Created by Tim on 3/2/2015.
+ */
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -9,10 +13,6 @@ import android.view.View;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.internal.CardThumbnail;
-
-/**
- * Created by Tim on 3/2/2015.
- */
 
 public class CustomCard extends Card {
 

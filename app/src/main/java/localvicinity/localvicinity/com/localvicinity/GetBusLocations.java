@@ -1,5 +1,8 @@
 package localvicinity.localvicinity.com.localvicinity;
 
+/**
+ * Created by Tim on 2/13/2015.
+ */
 
 import android.content.Context;
 
@@ -10,13 +13,9 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by Tim on 2/13/2015.
- */
 public class GetBusLocations {
 
     static final String KEY_LIST = "ArrayOfVehicleLocation";
@@ -85,8 +84,7 @@ public class GetBusLocations {
                         if (tagname.equalsIgnoreCase(KEY_BUS)) {
                             //if </bar> then we are done with current bar add it to the list.
                             specials.add(currentLocation);
-                        }
-                        else if (tagname.equalsIgnoreCase(KEY_DEST)) {
+                        } else if (tagname.equalsIgnoreCase(KEY_DEST)) {
                             currentLocation.setName(curText);
                             //System.out.println("Destination: " + curText);
                         } else if (tagname.equalsIgnoreCase(KEY_LAT)) {
@@ -95,13 +93,13 @@ public class GetBusLocations {
                         } else if (tagname.equalsIgnoreCase(KEY_LONG)) {
                             currentLocation.setLongitude(Double.parseDouble(curText));
                             //System.out.println("Latitude: " + curText);
-                        }else if (tagname.equalsIgnoreCase(KEY_ROUTE)) {
+                        } else if (tagname.equalsIgnoreCase(KEY_ROUTE)) {
                             currentLocation.setRoute_number(Integer.parseInt(curText));
                             //System.out.println("Latitude: " + curText);
-                        }else if (tagname.equalsIgnoreCase(KEY_LASTUPDATE)) {
+                        } else if (tagname.equalsIgnoreCase(KEY_LASTUPDATE)) {
                             currentLocation.setLast_updated(curText);
                             //System.out.println("Latitude: " + curText);
-                        }else if (tagname.equalsIgnoreCase(KEY_ONBOARD)) {
+                        } else if (tagname.equalsIgnoreCase(KEY_ONBOARD)) {
                             currentLocation.setOnBoard(Integer.parseInt(curText));
                             //System.out.println("Latitude: " + curText);
                         }
@@ -118,7 +116,7 @@ public class GetBusLocations {
         }
 
         //return the populated list
-        for (Iterator<Bus> iterator = specials.iterator(); iterator.hasNext();) {
+        for (Iterator<Bus> iterator = specials.iterator(); iterator.hasNext(); ) {
             MyLocation bus = iterator.next();
         }
 

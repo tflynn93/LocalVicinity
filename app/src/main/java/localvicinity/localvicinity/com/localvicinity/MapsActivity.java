@@ -1,24 +1,18 @@
 package localvicinity.localvicinity.com.localvicinity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -26,7 +20,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
@@ -58,7 +51,7 @@ public class MapsActivity extends ActionBarActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        PointsList p = ((PointsList)getApplicationContext());
+        PointsList p = ((PointsList) getApplicationContext());
         points = p.getPoints();
         Bundle extras = getIntent().getExtras();
         //category = extras.getString("category");
@@ -67,7 +60,7 @@ public class MapsActivity extends ActionBarActivity {
         getSupportActionBar().setTitle(ltd.typeDescription(lt));
         setUpMapIfNeeded();
 
-        if(lt == LocationType.BUS_STOP) {
+        if (lt == LocationType.BUS_STOP) {
             this.mHandler = new Handler();
             m_Runnable.run();
         }
@@ -86,12 +79,10 @@ public class MapsActivity extends ActionBarActivity {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_refresh:
-                if(lt == LocationType.BUS_STOP) {
+                if (lt == LocationType.BUS_STOP) {
                     SitesDownloadTask s = new SitesDownloadTask();
                     s.execute();
-                }
-                else
-                {
+                } else {
                     user.setLongitude(mMap.getMyLocation().getLongitude());
                     user.setLatitude(mMap.getMyLocation().getLatitude());
                     mMap.clear();
@@ -138,39 +129,23 @@ public class MapsActivity extends ActionBarActivity {
 
         BitmapDescriptor icon;
 
-        if(lt == LocationType.COMPUTER_LAB) {
+        if (lt == LocationType.COMPUTER_LAB) {
             icon = BitmapDescriptorFactory.fromResource(R.drawable.labicon);
-        }
-        else if(lt == LocationType.RESTAURANT)
-        {
+        } else if (lt == LocationType.RESTAURANT) {
             icon = BitmapDescriptorFactory.fromResource(R.drawable.restauranticon);
-        }
-        else if(lt == LocationType.BUS_STOP)
-        {
+        } else if (lt == LocationType.BUS_STOP) {
             icon = BitmapDescriptorFactory.fromResource(R.drawable.busstopicon);
-        }
-        else if(lt == LocationType.BANK_ATM)
-        {
+        } else if (lt == LocationType.BANK_ATM) {
             icon = BitmapDescriptorFactory.fromResource(R.drawable.bankicon);
-        }
-        else if(lt == LocationType.BATHROOM)
-        {
+        } else if (lt == LocationType.BATHROOM) {
             icon = BitmapDescriptorFactory.fromResource(R.drawable.bathicon);
-        }
-        else if(lt == LocationType.PARKING_LOT)
-        {
+        } else if (lt == LocationType.PARKING_LOT) {
             icon = BitmapDescriptorFactory.fromResource(R.drawable.parkingicon);
-        }
-        else if(lt == LocationType.BAR)
-        {
+        } else if (lt == LocationType.BAR) {
             icon = BitmapDescriptorFactory.fromResource(R.drawable.baricon);
-        }
-        else if(lt == LocationType.HOSPITAL)
-        {
+        } else if (lt == LocationType.HOSPITAL) {
             icon = BitmapDescriptorFactory.fromResource(R.drawable.hospitalicon);
-        }
-        else
-        {
+        } else {
             icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
         }
 
@@ -193,10 +168,9 @@ public class MapsActivity extends ActionBarActivity {
         // Get Current Location
         Location myLocation = locationManager.getLastKnownLocation(provider);
 
-        try{
-            myLocation = mMap.getMyLocation();}
-        catch(NullPointerException e)
-        {
+        try {
+            myLocation = mMap.getMyLocation();
+        } catch (NullPointerException e) {
 
         }
 
@@ -206,8 +180,7 @@ public class MapsActivity extends ActionBarActivity {
         // Get latitude of the current location
         try {
             latitude = myLocation.getLatitude();
-        }catch(NullPointerException e)
-        {
+        } catch (NullPointerException e) {
             //latitude = 0.0;
             latitude = 40.793643;
         }
@@ -215,8 +188,7 @@ public class MapsActivity extends ActionBarActivity {
         // Get longitude of the current location
         try {
             longitude = myLocation.getLongitude();
-        }catch(NullPointerException e)
-        {
+        } catch (NullPointerException e) {
             //longitude = 0.0;
             longitude = -77.86826296;
         }
@@ -225,18 +197,18 @@ public class MapsActivity extends ActionBarActivity {
         LatLng latLng = new LatLng(latitude, longitude);
 
         // Show the current location in Google Map
-        if(bigcount==0) {
+        if (bigcount == 0) {
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         }
 
         // Zoom in the Google Map
-        if(bigcount==0) {
+        if (bigcount == 0) {
             mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
         }
 
         LatLng myCoordinates = new LatLng(latLng.latitude, latLng.longitude);
 
-        if(bigcount==0) {
+        if (bigcount == 0) {
             CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(myCoordinates, 15);
         }
         //mMap.animateCamera(yourLocation);
@@ -247,17 +219,14 @@ public class MapsActivity extends ActionBarActivity {
         user.setLatitude(latLng.latitude);
 
 
-
-
         Location l = new Location("Points");
         for (MyLocation loc : points) {
-            try{
+            try {
                 l.setLatitude(loc.getLatitude());
                 l.setLongitude(loc.getLongitude());
 
-                loc.setDistance((int)user.distanceTo(l));}
-            catch(NullPointerException e)
-            {
+                loc.setDistance((int) user.distanceTo(l));
+            } catch (NullPointerException e) {
                 System.out.println("Null caught");
             }
         }
@@ -265,11 +234,11 @@ public class MapsActivity extends ActionBarActivity {
         Collections.sort(points, new DistanceComporator());
         count = 0;
 
-        if(lt != LocationType.BUS_STOP) {
+        if (lt != LocationType.BUS_STOP) {
             for (MyLocation loc : points) {
                 if (loc.getLocationType() == lt) {
-                    if(count==0) {
-                        if(bigcount!=0) {
+                    if (count == 0) {
+                        if (bigcount != 0) {
                             try {
                                 System.out.println(Double.toString(loc.getLatitude()) + ": " + Double.toString(loc.getLongitude()));
                                 Polyline line = mMap.addPolyline(new PolylineOptions()
@@ -292,15 +261,14 @@ public class MapsActivity extends ActionBarActivity {
     }
 
 
-    private final Runnable m_Runnable = new Runnable()
-    {
+    private final Runnable m_Runnable = new Runnable() {
         public void run()
 
         {
 
             SitesDownloadTask s = new SitesDownloadTask();
             s.execute();
-            MapsActivity.this.mHandler.postDelayed(m_Runnable,30000);
+            MapsActivity.this.mHandler.postDelayed(m_Runnable, 30000);
 
         }
 
@@ -333,8 +301,7 @@ public class MapsActivity extends ActionBarActivity {
             try {
                 user.setLongitude(mMap.getMyLocation().getLongitude());
                 user.setLatitude(mMap.getMyLocation().getLatitude());
-            }
-            catch(NullPointerException e){
+            } catch (NullPointerException e) {
                 System.out.println("Oopsies");
             }
 
@@ -345,14 +312,12 @@ public class MapsActivity extends ActionBarActivity {
             icon = BitmapDescriptorFactory.fromResource(R.drawable.busicon2);
 
             Location l3 = new Location("Busses");
-            for(Bus bus : busList)
-            {
-                try{
-                l3.setLatitude(bus.getLatitude());
-                l3.setLongitude(bus.getLongitude());
-                bus.setDistance((int)user.distanceTo(l3));}
-                catch(NullPointerException e)
-                {
+            for (Bus bus : busList) {
+                try {
+                    l3.setLatitude(bus.getLatitude());
+                    l3.setLongitude(bus.getLongitude());
+                    bus.setDistance((int) user.distanceTo(l3));
+                } catch (NullPointerException e) {
                 }
 
             }
@@ -360,41 +325,35 @@ public class MapsActivity extends ActionBarActivity {
             Collections.sort(busList, new DistanceComporator());
             int count2 = 0;
 
-            for(Bus loc : busList)
-            {
+            for (Bus loc : busList) {
                 try {
 
-                    if(count2==0 && bigcount!=0)
-                    {
+                    if (count2 == 0 && bigcount != 0) {
                         System.out.println("DISTANCE: " + loc.getDistance());
                         Polyline line = mMap.addPolyline(new PolylineOptions()
                                 .add(new LatLng(loc.getLatitude(), loc.getLongitude()), new LatLng(user.getLatitude(), user.getLongitude()))
                                 .width(5)
                                 .color(Color.GREEN));
                     }
-                    count2+=1;
+                    count2 += 1;
                     if (loc.getName().equals("Invalid Route Number")) {
 
                     } else {
                         //System.out.println("Inside MapsActivity: " + loc.name);
                         mMap.addMarker(new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude())).title(loc.getRoute_number(loc.getRoute_number())).snippet("Passengers: " + loc.getOnBoard()).icon(icon));
                     }
-                }
-                catch(NullPointerException e)
-                {
+                } catch (NullPointerException e) {
                     System.out.println("Null caught");
                 }
             }
 
             Location l2 = new Location("Stops");
-            for(BusStop bs : busStopList)
-            {
-                try{
-                l2.setLatitude(bs.getLatitude());
-                l2.setLongitude(bs.getLongitude());
-                bs.setDistance((int)user.distanceTo(l2));}
-                catch(NullPointerException e)
-                {
+            for (BusStop bs : busStopList) {
+                try {
+                    l2.setLatitude(bs.getLatitude());
+                    l2.setLongitude(bs.getLongitude());
+                    bs.setDistance((int) user.distanceTo(l2));
+                } catch (NullPointerException e) {
 
                 }
             }
@@ -402,10 +361,8 @@ public class MapsActivity extends ActionBarActivity {
             Collections.sort(busStopList, new DistanceComporator());
 
             int count = 0;
-            for(BusStop loc : busStopList)
-            {
-                if(count==0 && bigcount!=0)
-                {
+            for (BusStop loc : busStopList) {
+                if (count == 0 && bigcount != 0) {
                     Polyline line = mMap.addPolyline(new PolylineOptions()
                             .add(new LatLng(loc.getLatitude(), loc.getLongitude()), new LatLng(user.getLatitude(), user.getLongitude()))
                             .width(5)
@@ -413,8 +370,8 @@ public class MapsActivity extends ActionBarActivity {
                 }
                 //System.out.println("Inside MapsActivity: " + loc.name);
                 mMap.addMarker(new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude())).title(loc.getName()).snippet("Bus Stop").icon(icon2));
-                count+=1;
-                bigcount+=1;
+                count += 1;
+                bigcount += 1;
                 //System.out.println(loc.getName());
             }
         }

@@ -1,5 +1,8 @@
 package localvicinity.localvicinity.com.localvicinity;
 
+/**
+ * Created by Tim on 2/13/2015.
+ */
 
 import android.content.Context;
 
@@ -13,9 +16,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by Tim on 2/13/2015.
- */
 public class GetBusStops {
 
     static final String KEY_LIST = "ArrayOfStop";
@@ -81,15 +81,13 @@ public class GetBusStops {
                         if (tagname.equalsIgnoreCase(KEY_STOP)) {
                             //if </bar> then we are done with current bar add it to the list.
                             specials.add(currentLocation);
-                        }
-                        else if (tagname.equalsIgnoreCase(KEY_NAME)) {
+                        } else if (tagname.equalsIgnoreCase(KEY_NAME)) {
                             currentLocation.setName(curText);
                             //System.out.println("Destination: " + curText);
                         } else if (tagname.equalsIgnoreCase(KEY_LAT)) {
                             currentLocation.setLatitude(Double.parseDouble(curText));
                             //System.out.println("Longitude: " + curText);
-                        }
-                        else if (tagname.equalsIgnoreCase(KEY_LONG)) {
+                        } else if (tagname.equalsIgnoreCase(KEY_LONG)) {
                             currentLocation.setLongitude(Double.parseDouble(curText));
                             //System.out.println("Longitude: " + curText);
                         }
@@ -106,7 +104,7 @@ public class GetBusStops {
         }
 
         //return the populated list
-        for (Iterator<BusStop> iterator = specials.iterator(); iterator.hasNext();) {
+        for (Iterator<BusStop> iterator = specials.iterator(); iterator.hasNext(); ) {
             BusStop bus = iterator.next();
         }
 

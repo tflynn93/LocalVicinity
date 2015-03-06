@@ -3,6 +3,7 @@ package localvicinity.localvicinity.com.localvicinity;
 /**
  * Created by Tim on 3/5/2015.
  */
+
 public class LocationTypeDescriptor {
 
     public String typeDescription(LocationType lt) {
@@ -24,7 +25,7 @@ public class LocationTypeDescriptor {
             case RESTAURANT:
                 return "Restaurants";
             default:
-                return("Error!");
+                return ("Error!");
         }
     }
 

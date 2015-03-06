@@ -1,27 +1,29 @@
 package localvicinity.localvicinity.com.localvicinity;
 
+/**
+ * Created by Tim on 2/13/2015.
+ */
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URLConnection;
 
-/**
- * Created by Tim on 2/13/2015.
- */
 public class Downloader {
 
     //Handler msg that represents we are posting a progress update.
     static final int POST_PROGRESS = 1;
 
-    /************************************************
+    /**
+     * *********************************************
      * Download a file from the Internet and store it locally
      *
      * @param URL - the url of the file to download
      * @param fos - a FileOutputStream to save the downloaded file to.
-     ************************************************/
+     *            **********************************************
+     */
 
     public static void DownloadFromUrl(String URL, FileOutputStream fos) {  //this is the downloader method
         try {

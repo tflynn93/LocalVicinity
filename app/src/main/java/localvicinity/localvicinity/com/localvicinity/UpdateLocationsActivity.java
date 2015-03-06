@@ -1,5 +1,9 @@
 package localvicinity.localvicinity.com.localvicinity;
 
+/**
+ * Created by Tim on 2/21/2015.
+ */
+
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -12,12 +16,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
-
-/**
- * This activity updates a given contact record
- * @author KYAZZE MICHAEL
- *
- */
 
 public class UpdateLocationsActivity extends ActionBarActivity {
 
@@ -67,6 +65,7 @@ public class UpdateLocationsActivity extends ActionBarActivity {
 
     /**
      * Method that updates a given cloud contact
+     *
      * @param v
      * @throws UnknownHostException
      */
@@ -86,8 +85,8 @@ public class UpdateLocationsActivity extends ActionBarActivity {
 
     /**
      * AsyncTask to update a given contact
-     * @author KYAZZE MICHAEL
      *
+     * @author KYAZZE MICHAEL
      */
     final class MongoLabUpdateContact extends AsyncTask<Object, Void, Boolean> {
 
@@ -113,13 +112,10 @@ public class UpdateLocationsActivity extends ActionBarActivity {
                 osw.write(qb.setLocationData(myLocation));
                 osw.flush();
                 osw.close();
-                if(connection.getResponseCode() <205)
-                {
+                if (connection.getResponseCode() < 205) {
 
                     return true;
-                }
-                else
-                {
+                } else {
                     return false;
 
                 }

@@ -1,7 +1,12 @@
 package localvicinity.localvicinity.com.localvicinity;
 
+/**
+ * Created by Tim on 2/21/2015.
+ */
+
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,13 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-/**
- * This activity retrieves the mongolab contacts and displays them in a listview.
- * @author KYAZZE MICHAEL
- *
- */
-
-public class ViewLocationsActivity extends ListActivity{
+public class ViewLocationsActivity extends ListActivity {
     ArrayList<MyLocation> returnValues = new ArrayList();
     ArrayList<String> listItems = new ArrayList();
     Toolbar mToolbar;
@@ -44,8 +43,7 @@ public class ViewLocationsActivity extends ListActivity{
             e.printStackTrace();
         }
 
-        for(MyLocation x: returnValues){
-            //listItems.add(x.getDoc_id());
+        for (MyLocation x : returnValues) {
             listItems.add(x.getName() + " " + x.getType());
         }
 
@@ -54,12 +52,12 @@ public class ViewLocationsActivity extends ListActivity{
 
 
     }
+
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
         String selectedValue = (String) getListAdapter().getItem(position);
-        //Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
         selectedContact(selectedValue);
 
         Bundle dataBundle = new Bundle();
@@ -68,22 +66,14 @@ public class ViewLocationsActivity extends ListActivity{
         dataBundle.putString("longitude", valueTOUpdate_longitude);
         dataBundle.putString("latitude", valueTOUpdate_latitude);
         dataBundle.putString("type", valueTOUpdate_type);
-        Intent moreDetailsIntent = new Intent(this,UpdateLocationsActivity.class);
+        Intent moreDetailsIntent = new Intent(this, UpdateLocationsActivity.class);
         moreDetailsIntent.putExtras(dataBundle);
         startActivity(moreDetailsIntent);
     }
 
-    /*
-     * Retrieves the full details of a selected contact.
-     * The details are then passed onto the Update Contacts Record.
-     *
-     * This is a quick way for demo purposes.
-     * You should consider storing this data in a database, shared preferences or text file
-     */
-
-    public void selectedContact(String selectedValue){
-        for(MyLocation x: returnValues){
-            if(selectedValue.contains(x.getName())){
+    public void selectedContact(String selectedValue) {
+        for (MyLocation x : returnValues) {
+            if (selectedValue.contains(x.getName())) {
                 valueTOUpdate_id = x.getDoc_id();
                 valueTOUpdate_name = x.getName();
                 valueTOUpdate_longitude = Double.toString(x.getLongitude());

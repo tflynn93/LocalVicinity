@@ -1,12 +1,14 @@
 package localvicinity.localvicinity.com.localvicinity;
 
+/**
+ * Created by Tim on 1/21/2015.
+ */
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -23,8 +25,7 @@ import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.internal.CardThumbnail;
 import it.gmariotti.cardslib.library.view.CardGridView;
 
-
-public class MainActivity extends ActionBarActivity{
+public class MainActivity extends ActionBarActivity {
 
     Toolbar toolbar;
     public ArrayList<MyLocation> returnValues = new ArrayList<>();
@@ -45,10 +46,9 @@ public class MainActivity extends ActionBarActivity{
         getSupportActionBar().setTitle("Local Vicinity");
 
         //If network connection exists then download new files
-        if(isNetworkAvailable() == true) {
+        if (isNetworkAvailable() == true) {
             startDownloads();
-        }
-        else//If no connection display error message to the user
+        } else//If no connection display error message to the user
         {
             Toast.makeText(getApplicationContext(), "No network connection available, results may be incorrect",
                     Toast.LENGTH_LONG).show();
@@ -61,18 +61,17 @@ public class MainActivity extends ActionBarActivity{
         createAddCard();
 
         //Set the card grid array adapter
-        CardGridArrayAdapter mCardArrayAdapter = new CardGridArrayAdapter(this,cards);
+        CardGridArrayAdapter mCardArrayAdapter = new CardGridArrayAdapter(this, cards);
 
         //Bind the gridview to the adapter
         CardGridView gridView = (CardGridView) this.findViewById(R.id.myGrid);
-        if (gridView!=null){
+        if (gridView != null) {
             gridView.setAdapter(mCardArrayAdapter);
         }
     }
 
 
-    private void createMainCards()
-    {
+    private void createMainCards() {
         //Create new CustomCard instances for the different categories
         CustomCard bus = new CustomCard(this, LocationType.BUS_STOP, R.drawable.bus, R.color.darkpurple);
         CustomCard computer = new CustomCard(this, LocationType.COMPUTER_LAB, R.drawable.lab, R.color.darkblue);
@@ -94,8 +93,7 @@ public class MainActivity extends ActionBarActivity{
         cards.add(restaurant);
     }
 
-    private void createAddCard()
-    {
+    private void createAddCard() {
         //Create new header and set the title
         CardHeader addLocationHeader = new CardHeader(this);
         addLocationHeader.setTitle("Add New Location");
@@ -141,14 +139,13 @@ public class MainActivity extends ActionBarActivity{
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public void startDownloads()
-    {
+    public void startDownloads() {
         //New instance of GetLocationAsyncTask
         GetLocationsAsyncTask task = new GetLocationsAsyncTask();
         //Try to set points
         try {
             returnValues = task.execute().get();
-            PointsList p = ((PointsList)getApplicationContext());
+            PointsList p = ((PointsList) getApplicationContext());
             p.setPoints(returnValues);
         } catch (InterruptedException e) {
             e.printStackTrace();

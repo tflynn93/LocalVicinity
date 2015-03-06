@@ -1,5 +1,9 @@
 package localvicinity.localvicinity.com.localvicinity;
 
+/**
+ * Created by Tim on 2/13/2015.
+ */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -36,7 +40,7 @@ public class GetLocationsAsyncTask extends AsyncTask<MyLocation, Void, ArrayList
         HttpURLConnection conn = null;
         try {
             conn = (HttpURLConnection) url
-                        .openConnection();
+                    .openConnection();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,7 +63,7 @@ public class GetLocationsAsyncTask extends AsyncTask<MyLocation, Void, ArrayList
         BufferedReader br = null;
         try {
             br = new BufferedReader(new InputStreamReader(
-                        (conn.getInputStream())));
+                    (conn.getInputStream())));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -67,94 +71,76 @@ public class GetLocationsAsyncTask extends AsyncTask<MyLocation, Void, ArrayList
 
         try {
             while ((temp_output = br.readLine()) != null) {
-                    server_output = temp_output;
-                }
+                server_output = temp_output;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         // create a basic db list
-            String mongoarray = "{ testdb: "+server_output+"}";
-            //System.out.println(mongoarray);
-            Object o = com.mongodb.util.JSON.parse(mongoarray);
-            //System.out.println("Object output: " + o.toString());
-            DBObject dbObj = (DBObject) o;
-            //System.out.println("DB Object: " + dbObj.toString());
-            BasicDBList locations = (BasicDBList) dbObj.get("testdb");
+        String mongoarray = "{ testdb: " + server_output + "}";
+        //System.out.println(mongoarray);
+        Object o = com.mongodb.util.JSON.parse(mongoarray);
+        //System.out.println("Object output: " + o.toString());
+        DBObject dbObj = (DBObject) o;
+        //System.out.println("DB Object: " + dbObj.toString());
+        BasicDBList locations = (BasicDBList) dbObj.get("testdb");
 
-            for (Object obj : locations) {
+        for (Object obj : locations) {
 
-                //System.out.println("Objects in For Loop: " + obj.toString());
-                DBObject userObj = (DBObject) obj;
-                MyLocation temp = new MyLocation();
+            //System.out.println("Objects in For Loop: " + obj.toString());
+            DBObject userObj = (DBObject) obj;
+            MyLocation temp = new MyLocation();
 
-                try {
-                    //System.out.println("Here");
-                    temp.setDoc_id(userObj.get("_id").toString());
-                    //System.out.println(temp.getDoc_id());
-                    temp.setName(userObj.get("name").toString());
-                    //System.out.println(temp.getName());
-                    temp.setLongitude(Double.parseDouble(userObj.get("longitude").toString()));
-                    //System.out.println(temp.getLongitude());
-                    temp.setLatitude(Double.parseDouble(userObj.get("latitude").toString()));
-                    //System.out.println(temp.getLatitude());
-                    temp.setType(userObj.get("type").toString());
-                    //System.out.println(temp.getType());
-                    if(userObj.get("type").toString().equalsIgnoreCase("Bus Stop"))
-                    {
-                        temp.setLocationType(LocationType.BUS_STOP);
-                    }
-                    else if (userObj.get("type").toString().equalsIgnoreCase("Computer Lab"))
-                    {
-                        temp.setLocationType(LocationType.COMPUTER_LAB);
-                    }
-                    else if (userObj.get("type").toString().equalsIgnoreCase("Restaurant"))
-                    {
-                        temp.setLocationType(LocationType.RESTAURANT);
-                    }
-                    else if (userObj.get("type").toString().equalsIgnoreCase("Hospital"))
-                    {
-                        temp.setLocationType(LocationType.HOSPITAL);
-                    }
-                    else if (userObj.get("type").toString().equalsIgnoreCase("Parking"))
-                    {
-                        temp.setLocationType(LocationType.PARKING_LOT);
-                    }
-                    else if (userObj.get("type").toString().equalsIgnoreCase("Bar"))
-                    {
-                        temp.setLocationType(LocationType.BAR);
-                    }
-                    else if (userObj.get("type").toString().equalsIgnoreCase("Bank"))
-                    {
-                        temp.setLocationType(LocationType.BANK_ATM);
-                    }
-                    else if (userObj.get("type").toString().equalsIgnoreCase("Bathroom"))
-                    {
-                        temp.setLocationType(LocationType.BATHROOM);
-                    }
-                }catch (NullPointerException e)
-                {
-                    System.out.println("Caught 1");
+            try {
+                //System.out.println("Here");
+                temp.setDoc_id(userObj.get("_id").toString());
+                //System.out.println(temp.getDoc_id());
+                temp.setName(userObj.get("name").toString());
+                //System.out.println(temp.getName());
+                temp.setLongitude(Double.parseDouble(userObj.get("longitude").toString()));
+                //System.out.println(temp.getLongitude());
+                temp.setLatitude(Double.parseDouble(userObj.get("latitude").toString()));
+                //System.out.println(temp.getLatitude());
+                temp.setType(userObj.get("type").toString());
+                //System.out.println(temp.getType());
+                if (userObj.get("type").toString().equalsIgnoreCase("Bus Stop")) {
+                    temp.setLocationType(LocationType.BUS_STOP);
+                } else if (userObj.get("type").toString().equalsIgnoreCase("Computer Lab")) {
+                    temp.setLocationType(LocationType.COMPUTER_LAB);
+                } else if (userObj.get("type").toString().equalsIgnoreCase("Restaurant")) {
+                    temp.setLocationType(LocationType.RESTAURANT);
+                } else if (userObj.get("type").toString().equalsIgnoreCase("Hospital")) {
+                    temp.setLocationType(LocationType.HOSPITAL);
+                } else if (userObj.get("type").toString().equalsIgnoreCase("Parking")) {
+                    temp.setLocationType(LocationType.PARKING_LOT);
+                } else if (userObj.get("type").toString().equalsIgnoreCase("Bar")) {
+                    temp.setLocationType(LocationType.BAR);
+                } else if (userObj.get("type").toString().equalsIgnoreCase("Bank")) {
+                    temp.setLocationType(LocationType.BANK_ATM);
+                } else if (userObj.get("type").toString().equalsIgnoreCase("Bathroom")) {
+                    temp.setLocationType(LocationType.BATHROOM);
                 }
-                try {
-
-                    //System.out.println("Here3");
-
-                    //System.out.println("Here3");
-
-                    //System.out.println("Here4");
-
-                    //System.out.println("Here5");
-
-                    //System.out.println("Here6");
-                }
-                catch (NullPointerException e)
-                {
-                    System.out.println("Caught 2");
-                }
-                mylocations.add(temp);
-
+            } catch (NullPointerException e) {
+                System.out.println("Caught 1");
             }
+            try {
+
+                //System.out.println("Here3");
+
+                //System.out.println("Here3");
+
+                //System.out.println("Here4");
+
+                //System.out.println("Here5");
+
+                //System.out.println("Here6");
+            } catch (NullPointerException e) {
+                System.out.println("Caught 2");
+            }
+            mylocations.add(temp);
+
+        }
 
 
 

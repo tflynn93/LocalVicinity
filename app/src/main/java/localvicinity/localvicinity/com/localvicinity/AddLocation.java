@@ -1,5 +1,9 @@
 package localvicinity.localvicinity.com.localvicinity;
 
+/**
+ * Created by Tim on 3/6/2015.
+ */
+
 import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
@@ -10,27 +14,15 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-
 
 public class AddLocation extends ActionBarActivity {
 
@@ -70,12 +62,12 @@ public class AddLocation extends ActionBarActivity {
         submit.setVisibility(View.INVISIBLE);
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                    //Go to addlocationdetails class and pass long and lat
-                    Intent intent = new Intent(AddLocation.this, AddLocationDetails.class);
-                    intent.putExtra("long", marker.getPosition().longitude);
-                    intent.putExtra("lat", marker.getPosition().latitude);
-                    startActivity(intent);
-                    finish();
+                //Go to addlocationdetails class and pass long and lat
+                Intent intent = new Intent(AddLocation.this, AddLocationDetails.class);
+                intent.putExtra("long", marker.getPosition().longitude);
+                intent.putExtra("lat", marker.getPosition().latitude);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -112,15 +104,13 @@ public class AddLocation extends ActionBarActivity {
         Location myLocation = locationManager.getLastKnownLocation(provider);
         try {
             latitude = myLocation.getLatitude();
-        }catch(NullPointerException e)
-        {
+        } catch (NullPointerException e) {
             //If last location not found default to State College
             latitude = 40.793643;
         }
         try {
             longitude = myLocation.getLongitude();
-        }catch(NullPointerException e)
-        {
+        } catch (NullPointerException e) {
             //If last location not found default to State College
             longitude = -77.86826296;
         }
@@ -140,8 +130,10 @@ public class AddLocation extends ActionBarActivity {
                 // TODO Auto-generated method stub
                 marker = new MarkerOptions().position(
                         new LatLng(point.latitude, point.longitude)).title("New Location");
+                //Hide instructions and set button visible
                 instructions.setVisibility(View.INVISIBLE);
                 submit.setVisibility(View.VISIBLE);
+                //Clear any existing markers and add new one
                 mMap.clear();
                 mMap.addMarker(marker);
             }

@@ -1,10 +1,10 @@
 package localvicinity.localvicinity.com.localvicinity;
 
-import android.content.Context;
+/**
+ * Created by Tim on 3/6/2015.
+ */
+
 import android.content.Intent;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,13 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.net.UnknownHostException;
@@ -32,6 +26,7 @@ import java.util.concurrent.ExecutionException;
 
 public class AddLocationDetails extends ActionBarActivity {
 
+    //Define UI elements
     EditText editText_name, editText_longitude, editText_latitude;
     Button submit;
     Spinner location_type;
@@ -104,6 +99,7 @@ public class AddLocationDetails extends ActionBarActivity {
 
 
     }
+
     public void saveContact() throws UnknownHostException {
 
         MyLocation saveMyLocation = new MyLocation();

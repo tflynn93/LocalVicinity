@@ -3,104 +3,128 @@ package localvicinity.localvicinity.com.localvicinity;
 /**
  * Created by Tim on 2/13/2015.
  */
+
 public class Bus extends MyLocation {
 
     int route_number;
     String last_updated;
     int onBoard;
 
-    public void Bus()
-    {
+    public void Bus() {
 
     }
 
-    public void setLast_updated(String last)
-    {
+    public void setLast_updated(String last) {
         last_updated = last;
     }
-    public String getLast_updated()
-    {
+
+    public String getLast_updated() {
         return last_updated;
     }
-    public void setOnBoard(int num)
-    {
+
+    public void setOnBoard(int num) {
         onBoard = num;
     }
-    public int getOnBoard()
-    {
+
+    public int getOnBoard() {
         return onBoard;
     }
 
-    public void setRoute_number(int route)
-    {
+    public void setRoute_number(int route) {
         route_number = route;
     }
 
-    public int getRoute_number()
-    {
+    public int getRoute_number() {
         return route_number;
     }
 
-    public String getRoute_number(int route)
-    {
+    public String getRoute_number(int route) {
         String route_name;
 
         switch (route) {
-            case 1:  route_name = "A - Park Forest";
+            case 1:
+                route_name = "A - Park Forest";
                 break;
-            case 4:  route_name = "B - Boalsburg";
+            case 4:
+                route_name = "B - Boalsburg";
                 break;
-            case 7:  route_name = "C - Houserville";
+            case 7:
+                route_name = "C - Houserville";
                 break;
-            case 10:  route_name = "F - Pine Grove";
+            case 10:
+                route_name = "F - Pine Grove";
                 break;
-            case 11:  route_name = "G - Stormstown";
+            case 11:
+                route_name = "G - Stormstown";
                 break;
-            case 13:  route_name = "HP - Toftrees/Scenery Park";
+            case 13:
+                route_name = "HP - Toftrees/Scenery Park";
                 break;
-            case 16:  route_name = "K - Cato Park";
+            case 16:
+                route_name = "K - Cato Park";
                 break;
-            case 19:  route_name = "M - Nittany Mall";
+            case 19:
+                route_name = "M - Nittany Mall";
                 break;
-            case 22:  route_name = "N - Martin St/Aaron Dr";
+            case 22:
+                route_name = "N - Martin St/Aaron Dr";
                 break;
-            case 21: route_name = "NE - Martin St/Aaron Dr Express";
+            case 21:
+                route_name = "NE - Martin St/Aaron Dr Express";
                 break;
-            case 25: route_name = "NV - Martin St/Vairo Blvd";
+            case 25:
+                route_name = "NV - Martin St/Vairo Blvd";
                 break;
-            case 31: route_name = "R - Waupelani Dr";
+            case 31:
+                route_name = "R - Waupelani Dr";
                 break;
-            case 33: route_name = "RC - Waupelani Dr - Campus";
+            case 33:
+                route_name = "RC - Waupelani Dr - Campus";
                 break;
-            case 34: route_name = "RP - Waupelani Dr - Downtown";
+            case 34:
+                route_name = "RP - Waupelani Dr - Downtown";
                 break;
-            case 37: route_name = "S - Science Park";
+            case 37:
+                route_name = "S - Science Park";
                 break;
-            case 40: route_name = "UT - University Terrace";
+            case 40:
+                route_name = "UT - University Terrace";
                 break;
-            case 43: route_name = "V - Vairo Blvd";
+            case 43:
+                route_name = "V - Vairo Blvd";
                 break;
-            case 42: route_name = "VE - Vairo Blvd Express";
+            case 42:
+                route_name = "VE - Vairo Blvd Express";
                 break;
-            case 44: route_name = "VN - Toftrees Vairo Martin";
+            case 44:
+                route_name = "VN - Toftrees Vairo Martin";
                 break;
-            case 46: route_name = "W - Valley Vista";
+            case 46:
+                route_name = "W - Valley Vista";
                 break;
-            case 45: route_name = "WE - Valley Vista Express";
+            case 45:
+                route_name = "WE - Valley Vista Express";
                 break;
-            case 49: route_name = "XB - Bellefonte";
+            case 49:
+                route_name = "XB - Bellefonte";
                 break;
-            case 50: route_name = "XG - Pleasant Gap";
+            case 50:
+                route_name = "XG - Pleasant Gap";
                 break;
-            case 55: route_name = "Blue Loop";
+            case 55:
+                route_name = "Blue Loop";
                 break;
-            case 57: route_name = "White Loop";
+            case 57:
+                route_name = "White Loop";
                 break;
-            case 51: route_name = "Red Link";
+            case 51:
+                route_name = "Red Link";
                 break;
-            case 53: route_name = "Green Link";
+            case 53:
+                route_name = "Green Link";
                 break;
-            default: route_name = "Invalid Route Number";
+            default:
+                route_name = "Invalid Route Number";
                 break;
         }
 

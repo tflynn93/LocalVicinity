@@ -1,11 +1,9 @@
 package localvicinity.localvicinity.com.localvicinity;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 /**
  * Created by Tim on 2/10/2015.
  */
+
 public class MyLocation implements Comparable {
 
     String doc_id;
@@ -16,8 +14,7 @@ public class MyLocation implements Comparable {
     LocationType lt;
     int distance;
 
-    public MyLocation()
-    {
+    public MyLocation() {
 
     }
 
