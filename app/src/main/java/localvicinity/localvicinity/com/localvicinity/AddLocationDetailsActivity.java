@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 
-public class AddLocationDetails extends ActionBarActivity {
+public class AddLocationDetailsActivity extends ActionBarActivity {
 
     //Define UI elements
     EditText editText_name, editText_longitude, editText_latitude;
@@ -92,7 +92,7 @@ public class AddLocationDetails extends ActionBarActivity {
                             Toast.LENGTH_SHORT).show();
 
                     //Switch to new activity
-                    Intent intent = new Intent(AddLocationDetails.this, ViewLocationsActivity.class);
+                    Intent intent = new Intent(AddLocationDetailsActivity.this, ViewLocationsActivity.class);
                     startActivity(intent);
                     finish();
 

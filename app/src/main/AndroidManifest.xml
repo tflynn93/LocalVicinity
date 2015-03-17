@@ -33,7 +33,7 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main" />
         <activity
-            android:name=".Splash"
+            android:name=".SplashActivity"
             android:theme="@style/AppTheme" >
   android:label="Main" >
             <intent-filter>
@@ -53,21 +53,21 @@
         android:theme="@style/AppTheme"
         android:name=".ViewLocationsActivity"
         android:label="@string/title_activity_add_name"
-        android:parentActivityName=".AddLocationDetails"/>
+        android:parentActivityName=".AddLocationDetailsActivity"/>
 
 
 
         <activity
             android:theme="@style/AppTheme"
-            android:name=".AddLocation"
+            android:name=".AddLocationActivity"
             android:label="@string/title_activity_add_name"
             android:parentActivityName=".MainActivity"/>
 
         <activity
             android:theme="@style/AppTheme"
-            android:name=".AddLocationDetails"
+            android:name=".AddLocationDetailsActivity"
             android:label="@string/title_activity_add_name"
-            android:parentActivityName=".AddLocation"/>
+            android:parentActivityName=".AddLocationActivity"/>
 
 
 

@@ -125,7 +125,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(Card card, View view) {
                 //Set intent to AddLocation screen
-                Intent intent = new Intent(MainActivity.this, AddLocation.class);
+                Intent intent = new Intent(MainActivity.this, AddLocationActivity.class);
                 startActivity(intent);
             }
         });

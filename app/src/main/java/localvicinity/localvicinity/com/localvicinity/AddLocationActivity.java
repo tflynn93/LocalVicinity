@@ -23,7 +23,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class AddLocation extends ActionBarActivity {
+public class AddLocationActivity extends ActionBarActivity {
 
     //Declare variables
     Button submit;
@@ -62,7 +62,7 @@ public class AddLocation extends ActionBarActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //Go to addlocationdetails class and pass long and lat
-                Intent intent = new Intent(AddLocation.this, AddLocationDetails.class);
+                Intent intent = new Intent(AddLocationActivity.this, AddLocationDetailsActivity.class);
                 intent.putExtra("long", marker.getPosition().longitude);
                 intent.putExtra("lat", marker.getPosition().latitude);
                 startActivity(intent);
