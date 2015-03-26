@@ -5,4 +5,9 @@
             android:icon="@drawable/refresh"
             android:title="Draw Line(s) To Nearest"
             android:showAsAction="always" />
+
+      <item android:id="@+id/action_listview"
+            android:icon="@drawable/refresh"
+            android:title="View as list"
+            android:showAsAction="always" />
     </menu>

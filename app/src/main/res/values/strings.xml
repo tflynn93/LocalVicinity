@@ -19,5 +19,6 @@
     <string name="last_name">Flynn</string>
     <string name="email">abc@xyz.com</string>
     <string name="phone">5556667777</string>
+    <string name="title_activity_location_list">LocationListActivity</string>
 
 </resources>

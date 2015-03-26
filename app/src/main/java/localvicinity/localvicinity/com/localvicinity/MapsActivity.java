@@ -1,6 +1,7 @@
 package localvicinity.localvicinity.com.localvicinity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
@@ -89,8 +90,9 @@ public class MapsActivity extends ActionBarActivity {
                     setUpMap();
                 }
                 return true;
-            case R.id.action_settings:
-                ;
+            case R.id.action_listview:
+                Intent intent = new Intent(MapsActivity.this, LocationListActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
