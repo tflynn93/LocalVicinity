@@ -56,7 +56,14 @@ public class MapsActivity extends ActionBarActivity {
         points = p.getPoints();
         Bundle extras = getIntent().getExtras();
         //category = extras.getString("category");
-        lt = (LocationType) extras.getSerializable("category");
+        try {
+            lt = (LocationType) extras.getSerializable("category");
+            p.setLocationType(lt);
+        }
+        catch(NullPointerException e) {
+            lt = p.getLocationType();
+        }
+
         ltd = new LocationTypeDescriptor();
         getSupportActionBar().setTitle(ltd.typeDescription(lt));
         setUpMapIfNeeded();
@@ -92,6 +99,7 @@ public class MapsActivity extends ActionBarActivity {
                 return true;
             case R.id.action_listview:
                 Intent intent = new Intent(MapsActivity.this, LocationListActivity.class);
+                intent.putExtra("category", lt);
                 startActivity(intent);
                 return true;
             default:
@@ -102,7 +110,7 @@ public class MapsActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        setUpMapIfNeeded();
+        //setUpMapIfNeeded();
     }
 
     private void setUpMapIfNeeded() {
@@ -284,8 +292,12 @@ public class MapsActivity extends ActionBarActivity {
             super.onPostExecute(result);
 
             mMap.clear();
+
+            PointsList p = new PointsList();
             busList = GetBusLocations.getStackSitesFromFile(getApplicationContext());
             busStopList = GetBusStops.getStackSitesFromFile(getApplicationContext());
+
+
 
 
             try {
@@ -352,6 +364,7 @@ public class MapsActivity extends ActionBarActivity {
 
             //Sort bus stops by distance
             Collections.sort(busStopList, new DistanceComporator());
+            p.setBusStops(busStopList);
 
             int count = 0;
             for (BusStop loc : busStopList) {

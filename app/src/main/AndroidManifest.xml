@@ -70,7 +70,12 @@
         <activity
             android:name=".LocationListActivity"
             android:label="@string/title_activity_location_list"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MapsActivity" >
+        </activity>
+        <activity
+            android:name=".LocationDetailActivity"
+            android:label="@string/title_activity_location_detail"
+            android:parentActivityName=".LocationListActivity">
         </activity>
     </application>
 
