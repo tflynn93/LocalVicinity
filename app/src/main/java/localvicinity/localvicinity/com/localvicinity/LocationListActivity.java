@@ -64,7 +64,7 @@ public class LocationListActivity extends ActionBarActivity {
 
         }
 
-        for(MyLocation point :points)
+        for(MyLocation point: points)
         {
             if(point.getLocationType().toString().equalsIgnoreCase(lt.toString()))
             {
@@ -83,35 +83,15 @@ public class LocationListActivity extends ActionBarActivity {
                     i.putExtra("information", pointsListView.get(position).getName());
                     i.putExtra("latitude", Double.toString(pointsListView.get(position).getLatitude()));
                     i.putExtra("longitude",Double.toString(pointsListView.get(position).getLongitude()));
-
+                    i.putExtra("incorrect", pointsListView.get(position).getFlag());
+                    i.putExtra("_id", pointsListView.get(position).getDoc_id());
+                    i.putExtra("type", pointsListView.get(position).getType());
                     LocationListActivity.this.startActivity(i);
                     //MainActivity.this.finish();
             }
         });
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_location_list, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onBackPressed() {

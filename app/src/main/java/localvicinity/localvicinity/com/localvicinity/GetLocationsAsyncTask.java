@@ -94,6 +94,13 @@ public class GetLocationsAsyncTask extends AsyncTask<MyLocation, Void, ArrayList
                 temp.setLongitude(Double.parseDouble(userObj.get("longitude").toString()));
                 temp.setLatitude(Double.parseDouble(userObj.get("latitude").toString()));
                 temp.setType(userObj.get("type").toString());
+                try {
+                    temp.setFlag(userObj.get("incorrect").toString());
+                }
+                catch(NullPointerException e)
+                {
+                    temp.setFlag("false");
+                }
                 if (userObj.get("type").toString().equalsIgnoreCase("Bus Stop")) {
                     temp.setLocationType(LocationType.BUS_STOP);
                 } else if (userObj.get("type").toString().equalsIgnoreCase("Computer Lab")) {

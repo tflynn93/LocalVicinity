@@ -24,11 +24,13 @@ public class UpdateLocationsActivity extends ActionBarActivity {
     EditText editText_phone;
     EditText editText_email;
     EditText editText_fname;
+    EditText editText_flag;
     String _id;
     String name;
     String longitude;
     String latitude;
     String type;
+    String incorrect;
     Toolbar mToolbar;
 
     @Override
@@ -48,6 +50,7 @@ public class UpdateLocationsActivity extends ActionBarActivity {
         editText_last_name = (EditText) findViewById(R.id.editText_last_name);
         editText_email = (EditText) findViewById(R.id.editText_email);
         editText_phone = (EditText) findViewById(R.id.editText_phone);
+        editText_flag = (EditText) findViewById(R.id.editText_flag);
 
         //Obtain details of the clicked contact
         Bundle getBundle = null;
@@ -57,11 +60,13 @@ public class UpdateLocationsActivity extends ActionBarActivity {
         longitude = getBundle.getString("longitude");
         latitude = getBundle.getString("latitude");
         type = getBundle.getString("type");
+        incorrect = getBundle.getString("incorrect");
 
         editText_fname.setText(name);
         editText_last_name.setText(longitude);
         editText_email.setText(latitude);
         editText_phone.setText(type);
+        editText_flag.setText(incorrect);
     }
 
     public void updateContact(View v) throws UnknownHostException {
@@ -73,10 +78,11 @@ public class UpdateLocationsActivity extends ActionBarActivity {
         location.setLongitude(Double.parseDouble(editText_last_name.getText().toString()));
         location.setLatitude(Double.parseDouble(editText_email.getText().toString()));
         location.setType(editText_phone.getText().toString());
+        location.setFlag(editText_flag.getText().toString());
         MongoLabUpdateContact tsk = new MongoLabUpdateContact();
         tsk.execute(location);
-        Intent i = new Intent(this, ViewLocationsActivity.class);
-        startActivity(i);
+        //Intent i = new Intent(this, ViewLocationsActivity.class);
+        //startActivity(i);
         finish();
     }
 

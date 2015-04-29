@@ -13,9 +13,10 @@ public class MyLocation implements Comparable {
     String location_type;
     LocationType lt;
     int distance;
+    String incorrect;
 
     public MyLocation() {
-
+        boolean incorrect = false;
     }
 
     public String getDoc_id() {
@@ -72,6 +73,14 @@ public class MyLocation implements Comparable {
 
     public void setDistance(int distance) {
         this.distance = distance;
+    }
+
+    public String getFlag() {
+        return incorrect;
+    }
+
+    public void setFlag(String flag) {
+        this.incorrect = flag;
     }
 
     @Override

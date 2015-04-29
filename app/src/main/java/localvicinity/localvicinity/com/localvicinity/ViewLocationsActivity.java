@@ -24,6 +24,7 @@ public class ViewLocationsActivity extends ListActivity {
     String valueTOUpdate_longitude;
     String valueTOUpdate_latitude;
     String valueTOUpdate_type;
+    String valueTOUpdate_flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,7 @@ public class ViewLocationsActivity extends ListActivity {
         dataBundle.putString("longitude", valueTOUpdate_longitude);
         dataBundle.putString("latitude", valueTOUpdate_latitude);
         dataBundle.putString("type", valueTOUpdate_type);
+        dataBundle.putString("incorrect", valueTOUpdate_flag);
         Intent moreDetailsIntent = new Intent(this, UpdateLocationsActivity.class);
         moreDetailsIntent.putExtras(dataBundle);
         startActivity(moreDetailsIntent);
@@ -76,12 +78,13 @@ public class ViewLocationsActivity extends ListActivity {
 
     public void selectedContact(String selectedValue) {
         for (MyLocation x : returnValues) {
-            if (selectedValue.contains(x.getName())) {
+            if (selectedValue.equalsIgnoreCase(x.getName() + " " + x.getType())) {
                 valueTOUpdate_id = x.getDoc_id();
                 valueTOUpdate_name = x.getName();
                 valueTOUpdate_longitude = Double.toString(x.getLongitude());
                 valueTOUpdate_latitude = Double.toString(x.getLatitude());
                 valueTOUpdate_type = x.getType();
+                valueTOUpdate_flag = x.getFlag();
             }
         }
 

@@ -116,10 +116,12 @@ public class QueryBuilder {
                         + "{\"name\" : \"%s\", "
                         + "\"longitude\" : \"%s\", "
                         + "\"latitude\" : \"%s\", "
-                        + "\"type\" : \"%s\" }" + "}",
+                        + "\"type\" : \"%s\", "
+                        + "\"incorrect\" : \"%s\" }" + "}",
                 myLocation.getName(),
                 myLocation.getLongitude(), myLocation.getLatitude(),
-                myLocation.getType());
+                myLocation.getType(),
+                myLocation.getFlag());
     }
 
 }

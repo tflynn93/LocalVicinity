@@ -110,6 +110,7 @@ public class AddLocationDetailsActivity extends ActionBarActivity {
         saveMyLocation.latitude = Double.parseDouble(editText_latitude.getText().toString());
         saveMyLocation.longitude = Double.parseDouble(editText_longitude.getText().toString());
         saveMyLocation.location_type = location_type.getSelectedItem().toString();
+        saveMyLocation.setFlag("false");
         //Use SaveAsyncTask to save to MongoDB
         SaveAsyncTask tsk = new SaveAsyncTask();
         tsk.execute(saveMyLocation);

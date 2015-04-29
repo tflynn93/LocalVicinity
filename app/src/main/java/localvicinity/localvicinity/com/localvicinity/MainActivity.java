@@ -59,6 +59,7 @@ public class MainActivity extends ActionBarActivity {
 
         //Create the card for adding a location
         createAddCard();
+        createViewCard();
 
         //Set the card grid array adapter
         CardGridArrayAdapter mCardArrayAdapter = new CardGridArrayAdapter(this, cards);
@@ -126,6 +127,44 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(Card card, View view) {
                 //Set intent to AddLocation screen
                 Intent intent = new Intent(MainActivity.this, AddLocationActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void createViewCard() {
+        //Create new header and set the title
+        CardHeader addLocationHeader = new CardHeader(this);
+        addLocationHeader.setTitle("View Current Database");
+
+        //Create new card instance
+        Card addLocation = new Card(this);
+
+        //Set thumbnail and drawable resource
+        //CardThumbnail addLocationThumb = new CardThumbnail(this);
+        //addLocationThumb.setDrawableResource(R.drawable.hacker);
+
+        //Set color
+        addLocation.setBackgroundResourceId(R.color.darkorange);
+
+        //Add header
+        addLocation.addCardHeader(addLocationHeader);
+
+        //Add thumbnail
+        //addLocation.addCardThumbnail(addLocationThumb);
+
+        //Set clickable
+        addLocation.setClickable(true);
+
+        //Add to arraylist
+        cards.add(addLocation);
+
+        //Set onClick listener
+        addLocation.setOnClickListener(new Card.OnCardClickListener() {
+            @Override
+            public void onClick(Card card, View view) {
+                //Set intent to AddLocation screen
+                Intent intent = new Intent(MainActivity.this, ViewLocationsActivity.class);
                 startActivity(intent);
             }
         });

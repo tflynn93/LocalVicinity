@@ -16,9 +16,9 @@
         android:text="Update Record"
         android:background="@color/blue"
         android:textColor="#FFFFFF"
-        android:layout_below="@+id/editText_phone"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="43dp" />
+        android:layout_marginTop="47dp"
+        android:layout_below="@+id/editText_flag"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -67,5 +67,16 @@
         android:layout_below="@+id/editText_email"
         android:layout_centerHorizontal="true"
         android:textColor="@color/blue" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/editText_flag"
+        android:textColor="@color/blue"
+        android:layout_below="@+id/editText_phone"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
